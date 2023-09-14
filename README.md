@@ -1,9 +1,10 @@
-# -Polkadot-Rust-Substrate-Project
+# Polkadot-Rust-Substrate-Project
 
 ## Overview
 
 - **Building a blockchain:** Simulation of a transaction on Substrate node using front end.
-- **Simulating a substrate network:** 
+- **Simulating a substrate network:**
+- **Adding trusted nodes to a network:**
 
 ### 1. Building a blockchain
 1. Cloned the the substrate node template to start a substrate node from `https://github.com/substrate-developer-hub/substrate-node-template`
@@ -20,16 +21,9 @@ Transaction simulated here is from Alice to Dave and the amount is 1 unit.
 ### 2. Simulating a substrate network
 
 
-Events
-system:ExtrinsicSuccess
-{"dispatchInfo":{"weight":{"refTime":"308,980,000","proofSize":"3,593"},"class":"Normal","paysFee":"Yes"}}
-transactionPayment:TransactionFeePaid
-{"who":"5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY","actualFee":"308,980,146","tip":"0"}
-balances:Transfer
-{"from":"5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY","to":"5DAAnrj7VHTznn2AWBemMuyBwZWs6FNFjdyVXUeYum3PTXFy","amount":"1,000,000,000,000"}
-balances:Endowed
-{"account":"5DAAnrj7VHTznn2AWBemMuyBwZWs6FNFjdyVXUeYum3PTXFy","freeBalance":"1,000,000,000,000"}
-system:NewAccount
-{"account":"5DAAnrj7VHTznn2AWBemMuyBwZWs6FNFjdyVXUeYum3PTXFy"}
-balances:Withdraw
-{"who":"5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY","amount":"308,980,146"}
+### 3. Adding trusted nodes to a network
+1. Opened up two terminals with different Linux users.
+2. Cloned and ran substrate node template on both terminals.
+3. Generated aura key using Sr25519 signature and grandpa key using Ed25519 signature
+4. 
+   
