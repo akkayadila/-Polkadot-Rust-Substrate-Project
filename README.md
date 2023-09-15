@@ -37,14 +37,14 @@ Shown above is Alice node discovering Bob node and switching from 0 peers to 1 p
 5. Opened `customSpec.json` and edited in aura and granpa keys generated earlier to obtain custom chain specifications with validators.
 6. Converted .json file to raw format with command `./target/release/node-template build-spec --chain=customSpec.json --raw --disable-default-bootnode > customSpecRaw.json` so that the chain can be used
 7. Ran the first node using the command:
-` ./target/release/node-template
-  --base-path /tmp/node01
-  --chain ./customSpecRaw.json
-  --port 30333 
-  --rpc-port 9933 
-  --telemetry-url "wss://telemetry.polkadot.io/submit/ 0" 
-  --validator 
-  --rpc-methods Unsafe 
-  --name MyNode01 
+ `./target/release/node-template  
+  --base-path /tmp/node01  
+  --chain ./customSpecRaw.json  
+  --port 30333  
+  --rpc-port 9933  
+  --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"  
+  --validator  
+  --rpc-methods Unsafe  
+  --name MyNode01  
   --password-interactive`
    
