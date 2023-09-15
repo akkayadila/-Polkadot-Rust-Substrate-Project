@@ -57,6 +57,13 @@ Shown above is Alice node discovering Bob node and switching from 0 peers to 1 p
 ```
 ./target/release/node-template --base-path /tmp/node02 --chain ./customSpecRaw.json --port 30334 --rpc-port 9934 --telemetry-url "wss://telemetry.polkadot.io/submit/ 0" --validator --rpc-methods Unsafe --name MyNode02 --bootnodes /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWLmrYDLoNTyTYtRdDyZLWDe1paxzxTw5RgjmHLfzW96SX --password-interactive
 ```
+12. Established connection
+```
+2023-09-15 13:32:43 discovered: 12D3KooWCKcvZrtEtAU7TdYvRsnJEUJo1fVqEJaYr9gZSGLbTJnD /ip4/172.29.95.146/tcp/30333
+2023-09-15 13:32:48 ✨ Imported #1 (0x1124…d394)
+2023-09-15 13:32:48 💤 Idle (1 peers), best: #1 (0x1124…d394), finalized #0 (0x6b8e…2bce), ⬇ 0.9kiB/s ⬆ 0.9kiB/s
+```
+
 <img width="960" alt="node1 init" src="https://github.com/akkayadila/-Polkadot-Rust-Substrate-Project/assets/133990573/3cbe801a-3c7d-4555-b31b-9c09df0e7b26">
 
 Starting the first node 
