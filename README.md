@@ -30,5 +30,7 @@ Shown above is Alice node discovering Bob node and switching from 0 peers to 1 p
 1. Opened up two terminals with different Linux users.
 2. Cloned and ran substrate node template on both terminals.
 3. Generated aura key using Sr25519 signature and grandpa key using Ed25519 signature
-4. 
+4. Export the local chain specifications into `customSpec.json` using the command `./target/release/node-template build-spec --disable-default-bootnode --chain local > customSpec.json`
+5. Open `customSpec.json` and edit in aura and granpa keys generated earlier to obtain custom chain specifications
+6. 
    
