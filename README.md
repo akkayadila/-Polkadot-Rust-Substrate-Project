@@ -38,3 +38,12 @@ Shown above is Alice node discovering Bob node and switching from 0 peers to 1 p
 6. Converted .json file to raw format with command `./target/release/node-template build-spec --chain=customSpec.json --raw --disable-default-bootnode > customSpecRaw.json` so that the chain can be used
 7. Ran the first node using the command:  
 ` ./target/release/node-template --base-path/tmp/node01 --chain ./customSpecRaw.json --port 30333 --rpc-port 9933 --telemetry-url "wss://telemetry.polkadot.io/submit/ 0" --validator --rpc-methods Unsafe --name MyNode01 --password-interactive`
+8. Purged node1 and node2 using command `./target/release/node-template purge-chain --base-path /tmp/node<node-number> --chain local`
+9. Stored aura and grandpa keys of both nodes in the keystore
+10. Checked if keys are stored using command `ls /tmp/node<node-number>/chains/local_testnet/keystore`
+
+    Got outputs confirming both keys are stored in the keystore of each node
+   `6175726190ab52dea3e6f3c4fa4e63c27c198996f630e3bfa5bdc93a7b4ef94233df2118  6772616e8839da2c1d94331a28d198f8927247f661a68a1a477858dbf9aae83d30989353`
+    
+     `61757261d8f536e52327b37dc69323151ad06e9235801c763275511c3bbc0e261f7baa5f  6772616e9f33e11da27a45c110e7b3bac0af16a917cf4b5ab1769b05f44dd2a00f5f4288`
+
