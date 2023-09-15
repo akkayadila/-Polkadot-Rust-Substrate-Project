@@ -4,7 +4,7 @@
 
 - **Building a blockchain:** Simulation of a transaction on Substrate node using front end
 - **Simulating a substrate network:** Simulation a substrate network by with two nodes
-- **Adding trusted nodes to a network:**
+- **Adding trusted nodes to a network:** Simulation of a permissioned Substrate network with key authorized nodes
 
 ### 1. Building a blockchain
 1. Cloned the the substrate node template to start a substrate node from `https://github.com/substrate-developer-hub/substrate-node-template`
