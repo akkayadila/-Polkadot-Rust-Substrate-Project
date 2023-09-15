@@ -36,14 +36,39 @@ Shown above is Alice node discovering Bob node and switching from 0 peers to 1 p
 4. Exported the local chain specifications into `customSpec.json` using the command `./target/release/node-template build-spec --disable-default-bootnode --chain local > customSpec.json`
 5. Opened `customSpec.json` and edited in aura and granpa keys generated earlier to obtain custom chain specifications with validators.
 6. Converted .json file to raw format with command `./target/release/node-template build-spec --chain=customSpec.json --raw --disable-default-bootnode > customSpecRaw.json` so that the chain can be used
-7. Ran the first node using the command:  
-` ./target/release/node-template --base-path/tmp/node01 --chain ./customSpecRaw.json --port 30333 --rpc-port 9933 --telemetry-url "wss://telemetry.polkadot.io/submit/ 0" --validator --rpc-methods Unsafe --name MyNode01 --password-interactive`
+7. Ran the first node using the command:
+  ```
+  ./target/release/node-template --base-path/tmp/node01 --chain ./customSpecRaw.json --port 30333 --rpc-port 9933 --telemetry-url "wss://telemetry.polkadot.io/submit/ 0" --validator --rpc-methods Unsafe --name MyNode01 --password-interactive
+  ```
 8. Purged node1 and node2 using command `./target/release/node-template purge-chain --base-path /tmp/node<node-number> --chain local`
 9. Stored aura and grandpa keys of both nodes in the keystore
 10. Checked if keys are stored using command `ls /tmp/node<node-number>/chains/local_testnet/keystore`
 
     Got outputs confirming both keys are stored in the keystore of each node
-   `6175726190ab52dea3e6f3c4fa4e63c27c198996f630e3bfa5bdc93a7b4ef94233df2118  6772616e8839da2c1d94331a28d198f8927247f661a68a1a477858dbf9aae83d30989353`
-    
-     `61757261d8f536e52327b37dc69323151ad06e9235801c763275511c3bbc0e261f7baa5f  6772616e9f33e11da27a45c110e7b3bac0af16a917cf4b5ab1769b05f44dd2a00f5f4288`
+    ```
+    6175726190ab52dea3e6f3c4fa4e63c27c198996f630e3bfa5bdc93a7b4ef94233df2118
+    6772616e8839da2c1d94331a28d198f8927247f661a68a1a477858dbf9aae83d30989353
+    ```
+    ```
+    61757261d8f536e52327b37dc69323151ad06e9235801c763275511c3bbc0e261f7baa5f
+    6772616e9f33e11da27a45c110e7b3bac0af16a917cf4b5ab1769b05f44dd2a00f5f4288
+    ```
+11. Ran the first node again using the command on step 7 and ran the second node using command
+```
+./target/release/node-template --base-path /tmp/node02 --chain ./customSpecRaw.json --port 30334 --rpc-port 9934 --telemetry-url "wss://telemetry.polkadot.io/submit/ 0" --validator --rpc-methods Unsafe --name MyNode02 --bootnodes /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWLmrYDLoNTyTYtRdDyZLWDe1paxzxTw5RgjmHLfzW96SX --password-interactive
+```
+<img width="960" alt="node1 init" src="https://github.com/akkayadila/-Polkadot-Rust-Substrate-Project/assets/133990573/3cbe801a-3c7d-4555-b31b-9c09df0e7b26">
+
+Starting the first node 
+
+<img width="960" alt="node2 init" src="https://github.com/akkayadila/-Polkadot-Rust-Substrate-Project/assets/133990573/6da1b82d-3f76-40b1-b82e-3e5c67038fa5">
+
+Starting the second node 
+
+
+<img width="960" alt="part 3 connected" src="https://github.com/akkayadila/-Polkadot-Rust-Substrate-Project/assets/133990573/7000badd-a477-45f0-bb44-a63fb1aee1f3">
+
+Nodes stablished connection and started producing blocks
+
+
 
