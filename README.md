@@ -2,8 +2,8 @@
 
 ## Overview
 
-- **Building a blockchain:** Simulation of a transaction on Substrate node using front end.
-- **Simulating a substrate network:**
+- **Building a blockchain:** Simulation of a transaction on Substrate node using front end
+- **Simulating a substrate network:** Simulation a substrate network by with two nodes
 - **Adding trusted nodes to a network:**
 
 ### 1. Building a blockchain
@@ -19,7 +19,12 @@ Transaction simulated here is from Alice to Dave and the amount is 1 unit.
 <img width="454" alt="polkadot2" src="https://github.com/akkayadila/-Polkadot-Rust-Substrate-Project/assets/133990573/9b3575e1-b1db-4b1c-a5c3-91d8e0c9f103">
 
 ### 2. Simulating a substrate network
+1. Purged the old chain data for Alice and Bob and starting new nodes
+2. Observed the nodes discovering each other on the network and starting consensus mechanism
 
+<img width="800" alt="polkadot7" src="https://github.com/akkayadila/-Polkadot-Rust-Substrate-Project/assets/133990573/ac687586-eb95-4032-a2b2-f15408a8a7a3">
+
+Shown above is Alice node discovering Bob node and switching from 0 peers to 1 peer and Bob node producing a block that is imported to Alice node.
 
 ### 3. Adding trusted nodes to a network
 1. Opened up two terminals with different Linux users.
