@@ -30,10 +30,21 @@ Shown above is Alice node discovering Bob node and switching from 0 peers to 1 p
 1. Opened up two terminals with different sudo users.
 2. Cloned and ran substrate node template on both terminals.
 3. Generated aura key using Sr25519 signature and grandpa key using Ed25519 signature
-  - Command used to get aura keys for both users: `./target/release/node-template key generate --scheme Sr25519 --password-interactive`
+  - Command used to get aura keys for respective users: `./target/release/node-template key generate --scheme Sr25519 --password-interactive`
   - Command used to get grandpa key for the first user: `./target/release/node-template key inspect --password-interactive --scheme Ed25519 "clay also afford asthma burden swallow enable rebuild duck range champion habit"`
   - Command used to get grandpa key for the first user: `./target/release/node-template key inspect --password-interactive --scheme Ed25519 "digital lunar lyrics brush witness funny rebuild master love stable hair gas"`
 4. Exported the local chain specifications into `customSpec.json` using the command `./target/release/node-template build-spec --disable-default-bootnode --chain local > customSpec.json`
 5. Opened `customSpec.json` and edited in aura and granpa keys generated earlier to obtain custom chain specifications with validators.
-6. Converted .json file to raw format with command `./target/release/node-template build-spec --chain=customSpec.json --raw --disable-default-bootnode > customSpecRaw.json` so that the chain can be used 
+6. Converted .json file to raw format with command `./target/release/node-template build-spec --chain=customSpec.json --raw --disable-default-bootnode > customSpecRaw.json` so that the chain can be used
+7. Ran the first node using the command:
+` ./target/release/node-template 
+  --base-path /tmp/node01 
+  --chain ./customSpecRaw.json 
+  --port 30333 
+  --rpc-port 9933 
+  --telemetry-url "wss://telemetry.polkadot.io/submit/ 0" 
+  --validator 
+  --rpc-methods Unsafe 
+  --name MyNode01 
+  --password-interactive`
    
