@@ -5,6 +5,7 @@
 - **Building a blockchain:** Simulation of a transaction on Substrate node using front end
 - **Simulating a substrate network:** Simulation a substrate network by with two nodes
 - **Adding trusted nodes to a network:** Simulation of a permissioned Substrate network with key authorized nodes
+- **Smart contracts:** Building a basic smart contract to run on Substrate chain.
 
 ### 1. Building a blockchain
 1. Cloned the the substrate node template to start a substrate node from `https://github.com/substrate-developer-hub/substrate-node-template`
@@ -75,7 +76,98 @@ Starting the second node
 
 <img width="960" alt="part 3 connected" src="https://github.com/akkayadila/-Polkadot-Rust-Substrate-Project/assets/133990573/7000badd-a477-45f0-bb44-a63fb1aee1f3">
 
-Nodes stablished connection and started producing blocks
+Nodes established connection and started producing blocks
 
 
 
+### 8. Smart contracts (added 21.09.2023)
+> [!NOTE]
+> In this section, contract building was having errors while loading wasm in the current rustup toolchain v1.72.0 with the following error log 
+>
+>```
+>dila@DESKTOP-VNOUVCJ:~/flipper$ cargo contract build
+> [1/5] Building cargo project
+>    Updating crates.io index
+>    Finished release [optimized] target(s) in 4.63s
+> [2/5] Post processing wasm file
+>ERROR: Loading of original wasm failed
+>```
+>
+>so I switched to v1.69.0 while installing the CLI tool, which fixed the problem
+
+1. Updated rustup tool with the command `rustup component add rust-src --toolchain 1.69`
+2. A CLI (command-line interface) tool is needed to compile and deploy smart contracts. Installed cargo contract CLI tool with the command `cargo install --force --locked cargo-contract --version 2.0.0-rc`
+3. Installed rust wasm toolchain with the command `rustup target add wasm32-unknown-unknown --toolchain 1.69`
+4. Installed Substrate Contracts Node, a blockchain that includes smart contract functionality, with the command `cargo install contracts-node --git https://github.com/paritytech/substrate-contracts-node.git --tag v0.31.0 --force --locked`
+5. Switched to substrate-node-template folder and created a new branch with `git switch -c my-learning-branch` and compiled with `cargo build --release`
+6. Created a folder named 'flipper' using the command `cargo contract new flipper`
+7. Changed to the new folder with `cd flipper` and executed the tests for the flipper contract by running `cargo test`
+
+Got the output saying both tests from lib.rs file run successfully
+
+```
+running 2 tests
+test flipper::tests::it_works ... ok
+test flipper::tests::default_works ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+8. Compiled the contract with `cargo contract build`
+
+```
+Original wasm size: 36.4K, Optimized: 12.4K
+
+The contract was built in DEBUG mode.
+
+Your contract artifacts are ready. You can find them in:
+/home/dila/flipper/target/ink
+
+  - flipper.contract (code + metadata)
+  - flipper.wasm (the contract's code)
+  - metadata.json (the contract's metadata)
+```
+
+9. Started the local node using the command `substrate-contracts-node --log info,runtime::contracts=debug 2>&1`
+10. Opened a new terminal and switched to flipper folder and instantiated the flipper contract with the command `cargo contract instantiate --constructor new --args "false" --suri //Alice --salt $(date +%s)`
+
+```
+    Event System ➜ ExtrinsicSuccess
+    dispatch_info: DispatchInfo { weight: Weight { ref_time: 3596541484, proof_size: 9095 }, class: Normal, pays_fee: Yes }
+```
+
+11. Noted the contract address in the following output to be able to call the contract
+
+```
+    Event Contracts ➜ Instantiated
+    deployer: 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
+    contract: 5DkKMp4RUMqUiw8Fa4PFfb4ZdfRurqZ8dJtf54GMLBZ5qWHz
+```
+
+12. Called the `get()` message using the command below after replacing the `$INSTANTIATED_CONTRACT_ADDRESS` variable with the actual adress in previous step
+
+`cargo contract call --contract $INSTANTIATED_CONTRACT_ADDRESS --message get --suri //Alice --dry-run`
+
+Following output is obtained, with the bool value being `false`
+
+```
+    Result Success!
+    Reverted false
+    Data Tuple(Tuple { ident: Some("Ok"), values: [Bool(false)] })
+```
+13. In order to switch the bool value from `false` to `true`, we use `flip()` message, with `$INSTANTIATED_CONTRACT_ADDRESS` replaced again with the actual adress
+
+```
+cargo contract call --contract $INSTANTIATED_CONTRACT_ADDRESS --message flip --suri //Alice
+```
+14. Called the `get` message again as we did in step 12, and obtained the following output
+```
+    Result Success!
+    Reverted false
+    Data Tuple(Tuple { ident: Some("Ok"), values: [Bool(true)] })
+```
+As we can see, the bool value is now `true`
+
+<img width="631" alt="8" src="https://github.com/akkayadila/-Polkadot-Rust-Substrate-Project/assets/133990573/1debf25e-d6a1-4997-890b-6a5f105b4c82">
+
+Using get() and flip() messages to interact with the contract
